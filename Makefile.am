@@ -99,6 +99,7 @@ nobase_include_HEADERS = \
 	metal/timer.h \
 	metal/tty.h \
 	metal/uart.h \
+	metal/i2c.h \
 	metal/watchdog.h
 
 if PRECONFIGURED
@@ -176,6 +177,7 @@ libriscv__mmachine__@MACHINE_NAME@_a_SOURCES = \
 	src/drivers/sifive_test0.c \
 	src/drivers/sifive_uart0.c \
 	src/drivers/sifive_wdog0.c \
+	src/drivers/synopsis,i2c.c \
 	src/button.c \
 	src/cache.c \
 	src/clock.c \
@@ -195,6 +197,7 @@ libriscv__mmachine__@MACHINE_NAME@_a_SOURCES = \
 	src/trap.S \
 	src/tty.c \
 	src/uart.c \
+	src/i2c.c \
 	src/watchdog.c
 
 # Freedom METAL has its own libgloss implementation that is only built in
