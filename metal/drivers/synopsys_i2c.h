@@ -2,7 +2,7 @@
 #define METAL__DRIVERS__SYNOPSIS_I2C_H
 
 #include<metal/compiler.h>
-#include<metal/drivers/riscv,plic0.h>
+#include<metal/drivers/riscv_plic0.h>
 #include<metal/i2c.h>
 #include <metal/clock.h>
 
