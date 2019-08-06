@@ -1,4 +1,4 @@
-#include <metal/drivers/synopsys,i2c.h>
+#include <metal/drivers/synopsys_i2c.h>
 #include <metal/io.h>
 
 // no need of below #defines need to be placed in the bare_metal

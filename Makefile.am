@@ -177,7 +177,7 @@ libriscv__mmachine__@MACHINE_NAME@_a_SOURCES = \
 	src/drivers/sifive_test0.c \
 	src/drivers/sifive_uart0.c \
 	src/drivers/sifive_wdog0.c \
-	src/drivers/synopsys,i2c.c \
+	src/drivers/synopsys_i2c.c \
 	src/button.c \
 	src/cache.c \
 	src/clock.c \
