@@ -1,4 +1,4 @@
-#include <metal/drivers/synopsis,i2c.h>
+#include <metal/drivers/synopsys,i2c.h>
 #include <metal/io.h>
 
 // no need of below #defines need to be placed in the bare_metal
@@ -41,7 +41,7 @@
 #define METAL_I2C_FAST_SPEED  0x2
 #define METAL_I2C_HIGH_SPEED 0x3
 
-#define I2C_REG(offset) (((unsigned long)(((struct __metal_driver_synopsis_i2c *)(i2c))->control_base) + offset))
+#define I2C_REG(offset) (((unsigned long)(((struct __metal_driver_synopsys_i2c *)(i2c))->control_base) + offset))
 #define I2C_REGB(offset) (__METAL_ACCESS_ONCE((__metal_io_u8 *)I2C_REG(offset)))
 #define I2C_REG_RW_BIT(offset,bit,val) (write_register(i2c,offset,set_bit(read_register(i2c,offset),bit,val)))
 #define I2C_REG_RW_BIT_RANGE(offset,start_bit,stop_bit,val) (write_register(i2c,offset,set_bit_range(read_register(i2c,offset),start_bit,stop_bit,val)))
@@ -161,7 +161,7 @@ REGISTER_DATATYPE read_register_bit_range(struct metal_i2c *i2c,REGISTER_DATATYP
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int __metal_driver_synopsis_i2c_set_speed_mode(struct metal_i2c *i2c,struct metal_i2c_config *cfg)
+int __metal_driver_synopsys_i2c_set_speed_mode(struct metal_i2c *i2c,struct metal_i2c_config *cfg)
 {	
 
 	I2C_REG_RW_BIT(IC_ENABLE,0,0);
@@ -183,7 +183,7 @@ int __metal_driver_synopsis_i2c_set_speed_mode(struct metal_i2c *i2c,struct meta
 			
 }		
 
-int __metal_driver_synopsis_i2c_set_address_mode(struct metal_i2c *i2c,struct metal_i2c_config *cfg)
+int __metal_driver_synopsys_i2c_set_address_mode(struct metal_i2c *i2c,struct metal_i2c_config *cfg)
 {
 
 	I2C_REG_RW_BIT(IC_ENABLE,0,0);
@@ -204,12 +204,12 @@ int __metal_driver_synopsis_i2c_set_address_mode(struct metal_i2c *i2c,struct me
 }		
 
 
-int __metal_driver_synopsis_i2c_set_target_address(struct metal_i2c *i2c,struct metal_i2c_config *cfg,unsigned int address)
+int __metal_driver_synopsys_i2c_set_target_address(struct metal_i2c *i2c,struct metal_i2c_config *cfg,unsigned int address)
 {
 	write_register((struct metal_i2c *)(i2c),IC_TAR,set_bit(set_bit((REGISTER_DATATYPE)(address & 0x3ff),10,cfg->transmission_mode),11,cfg->enable_special_bit));
 }
 
-void __metal_driver_synopsis_i2c_init(struct metal_i2c *i2c,struct metal_i2c_config *cfg)
+void __metal_driver_synopsys_i2c_init(struct metal_i2c *i2c,struct metal_i2c_config *cfg)
 {
 		I2C_REG_RW_BIT(IC_ENABLE,0,0);
 		if(cfg->operation_mode == METAL_I2C_MASTER)
@@ -225,11 +225,11 @@ void __metal_driver_synopsis_i2c_init(struct metal_i2c *i2c,struct metal_i2c_con
 				write_register((struct metal_i2c *)(i2c),IC_SAR,cfg->slave_address);
 			}		
 
-		__metal_driver_synopsis_i2c_set_address_mode((struct metal_i2c *)(i2c),cfg);	
+		__metal_driver_synopsys_i2c_set_address_mode((struct metal_i2c *)(i2c),cfg);	
 
 		I2C_REG_RW_BIT(IC_CON,5,1);
 
-		__metal_driver_synopsis_i2c_set_target_address((struct metal_i2c *)(i2c),cfg,cfg->target_address);		
+		__metal_driver_synopsys_i2c_set_target_address((struct metal_i2c *)(i2c),cfg,cfg->target_address);		
 
 
 		write_register((struct metal_i2c *)(i2c),IC_TX_TL,cfg->transmitter_threshold);
@@ -241,7 +241,7 @@ void __metal_driver_synopsis_i2c_init(struct metal_i2c *i2c,struct metal_i2c_con
 
 }
 
-int __metal_driver_synopsis_i2c_write_transfer(struct metal_i2c *i2c,struct metal_i2c_config *cfg,int len,unsigned char *tx_buf)
+int __metal_driver_synopsys_i2c_write_transfer(struct metal_i2c *i2c,struct metal_i2c_config *cfg,int len,unsigned char *tx_buf)
 {
 	for (int i = 0;i<len;i++)
 		{
@@ -262,7 +262,7 @@ int __metal_driver_synopsis_i2c_write_transfer(struct metal_i2c *i2c,struct meta
 		}
 }			
 
-int __metal_driver_synopsis_i2c_read_transfer(struct metal_i2c *i2c,struct metal_i2c_config *cfg,int len,unsigned char *rx_buf)
+int __metal_driver_synopsys_i2c_read_transfer(struct metal_i2c *i2c,struct metal_i2c_config *cfg,int len,unsigned char *rx_buf)
 {
 	if(!(read_register_bit(i2c,IC_CON,0)))		{
 				for(int i=0;i<len;i++)
