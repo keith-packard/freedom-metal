@@ -70,12 +70,6 @@ int __metal_driver_sifive_trace_putc(struct metal_uart *trace, unsigned char c)
     return (int)c;
 }
 
-//int __metal_driver_sifive_trace_getc(struct metal_uart *trace, unsigned char *c)
-//{
-//    long base = __metal_driver_sifive_trace_base(trace);
-//    return 0;
-//}
-
 void __metal_driver_sifive_trace_init(struct metal_uart *trace, int baud_rate)
 {
     // The only init we do here is to make sure ITC 0 is enabled. It is up to Freedom Studio or
