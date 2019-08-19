@@ -204,6 +204,16 @@ libriscv__mmachine__@MACHINE_NAME@_a_SOURCES = \
 	src/uart.c \
 	src/watchdog.c
 
+lib_LIBRARIES += libriscv__pico__metal.a
+
+libriscv__pico__metal_a_SOURCES = \
+	pico/crt0.S \
+	pico/iob.c \
+	pico/exit.c \
+	pico/times.c \
+	pico/sbrk.c \
+	pico/sysconf.c
+
 # Freedom METAL has its own libgloss implementation that is only built in
 # --with-builtin-libgloss is passed to configure.
 if WITH_BUILTIN_LIBGLOSS
