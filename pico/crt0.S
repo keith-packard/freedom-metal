@@ -148,6 +148,10 @@ _start:
   jalr a2
 1:
 
+  /* Set TLS pointer */
+  la a0, __tls_base
+  call _set_tls
+
   /* The RISC-V port only uses new-style constructors and destructors. */
   la a0, __libc_fini_array
   call atexit
